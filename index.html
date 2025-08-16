@@ -1,185 +1,41 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>工場ミニDX｜最小5万円で始める小さなデジタル化</title>
-  <meta name="description" content="中小製造業向け“最小5万円”からの小さな工場DX。外注は高額が当たり前？必要なところだけを小さく導入し、短期間で効果確認。" />
-  <style>
-    :root{
-      --bg:#0b1220;
-      --grad1:#0b1220;
-      --grad2:#0f2549;
-      --glass:#0f1730cc; /* 80% */
-      --text:#e6ebf5;
-      --muted:#a8b0c3;
-      --line:#1f2a44;
-      --brand:#5ca9ff;
-      --accent:#ffd166;
-      --bad:#ff6b6b;
-      --good:#2dd4bf;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --radius-xl:22px;
-      --radius-lg:16px;
-      --radius-md:12px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{
-      font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 10% -20%, #1b2f6acc, transparent 60%),
-        radial-gradient(900px 500px at 90% 0%, #1c5b8f99, transparent 60%),
-        linear-gradient(180deg, var(--grad1), var(--grad2));
-      min-height:100dvh;
-      letter-spacing:.02em;
-    }
-    a{color:var(--brand)}
-
-    /* ====== Layout ====== */
-    .container{max-width:1160px;margin:0 auto;padding:0 22px}
-
-    header.nav{
-      position:sticky;top:0;z-index:20;
-      backdrop-filter:saturate(140%) blur(8px);
-      background:linear-gradient(180deg, rgba(10,16,30,.8), rgba(10,16,30,.2));
-      border-bottom:1px solid var(--line);
-    }
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .logo{display:flex;gap:10px;align-items:center;font-weight:800}
-    .logo-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5ca9ff,#7ad1ff);box-shadow:0 4px 12px rgba(92,169,255,.5)}
-    .logo-text{font-size:18px;letter-spacing:.04em}
-    .nav-cta a{display:inline-block;padding:10px 14px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--text)}
-    .nav-cta a:hover{border-color:#2b3a61}
-
-    /* ====== Hero ====== */
-    .hero{padding:72px 0 48px}
-    .hero-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
-    @media (max-width:980px){.hero-wrap{grid-template-columns:1fr}}
-
-    .hero-copy{padding:22px;border:1px solid var(--line);border-radius:var(--radius-xl);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));box-shadow:var(--shadow)}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(92,169,255,.15);color:#cfe5ff;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
-    .price-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,209,102,.18);color:var(--accent);border:1px solid rgba(255,209,102,.35);padding:6px 12px;border-radius:999px;font-weight:800;margin-left:8px}
-    h1{font-size:clamp(26px,4.4vw,44px);margin:12px 0 10px;line-height:1.25}
-    .lead{color:var(--muted);font-size:clamp(15px,2.2vw,18px)}
-
-    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .btn{appearance:none;border:0;border-radius:14px;padding:12px 18px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:transform .06s ease, opacity .2s ease, box-shadow .2s ease}
-    .btn-primary{background:linear-gradient(135deg,#6bb4ff,#4f9dff);color:#08121f;box-shadow:0 10px 18px rgba(79,157,255,.2)}
-    .btn-primary:hover{transform:translateY(-1px)}
-    .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
-
-    .deco{
-      position:relative;height:360px;border-radius:var(--radius-xl);
-      background:radial-gradient(600px 160px at 50% 0%, rgba(124,187,255,.35), transparent 50%),
-                 linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border:1px solid var(--line);
-      overflow:hidden;box-shadow:var(--shadow);
-    }
-    .chip{position:absolute;inset:auto;display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:rgba(13,22,46,.7);backdrop-filter:blur(8px);border:1px solid var(--line);font-size:14px;animation:floaty 6s ease-in-out infinite}
-    .chip svg{opacity:.9}
-    .chip-1{top:18px;left:18px;animation-delay:.1s}
-    .chip-2{bottom:18px;left:18px;animation-delay:.2s}
-    .chip-3{top:18px;right:18px;animation-delay:.3s}
-    .chip-4{top:80px;left:42%;animation-delay:.4s}
-    .chip-5{bottom:22px;right:22px;animation-delay:.5s}
-    .chip-6{top:50%;left:18px;transform:translateY(-50%);animation-delay:.6s}
-    .chip-7{top:50%;right:18px;transform:translateY(-50%);animation-delay:.7s}
-    .chip-8{bottom:90px;left:40%;animation-delay:.8s}
-    .chip-9{top:130px;right:120px;animation-delay:.9s}
-    .chip-10{bottom:150px;right:48%;animation-delay:1s}
-
-    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-
-    @media (max-width:980px){
-      .deco{height:320px}
-      .chip-7,.chip-9,.chip-10{display:none}
-      .chip-4{top:72px;left:50%;transform:translate(-50%,0)}
-      .chip-5{right:18px}
-      .chip-8{left:54%}
-    }
-
-    /* ====== Pain/Solution ====== */
-    section{padding:56px 0}
-    h2{font-size:clamp(22px,3.2vw,30px);margin:0 0 12px}
-    .muted{color:var(--muted)}
-
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    @media (max-width:960px){.grid3{grid-template-columns:1fr}}
-    .card{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;box-shadow:var(--shadow)}
-    .card h3{margin:0 0 6px;font-size:18px}
-    .panel{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;box-shadow:var(--shadow)}
-
-    /* ====== Pricing ====== */
-    .pricing{display:grid;grid-template-columns:1fr .9fr;gap:18px;align-items:stretch}
-    @media (max-width:980px){.pricing{grid-template-columns:1fr}}
-    .price-card{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius-xl);padding:22px;box-shadow:var(--shadow)}
-    .price-title{font-weight:800;color:#cfe5ff}
-    .price-main{font-size:46px;font-weight:900;letter-spacing:.4px;margin:4px 0}
-    .price-main .yen{font-size:.6em;margin-right:4px;color:var(--muted)}
-    .price-main .min{font-size:.5em;margin-left:2px;color:var(--muted)}
-    .price-list{margin:10px 0 0 18px}
-    .price-list li{margin:6px 0}
-    .price-foot{margin-top:10px;color:var(--muted)}
-
-    /* ====== Contact Form ====== */
-    .contact-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
-    @media (max-width:980px){.contact-wrap{grid-template-columns:1fr}}
-
-    form.mailform{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius-xl);padding:22px;box-shadow:var(--shadow)}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    @media (max-width:780px){.form-grid{grid-template-columns:1fr}}
-    .field{display:flex;flex-direction:column;gap:8px}
-    .label{font-size:.92rem;color:#cfd7ea;font-weight:700;letter-spacing:.06em}
-    .req{color:var(--accent);font-weight:800;margin-left:6px}
-    .inp, .sel, .txt{
-      width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));
-      color:var(--text);font-size:16px;outline:none;
-      transition:border .2s ease, box-shadow .2s ease;
-    }
-    .inp:focus, .sel:focus, .txt:focus{border-color:#2f4e92;box-shadow:0 0 0 4px rgba(92,169,255,.15)}
-    .help{color:var(--muted);font-size:.85rem}
-
-    .form-actions{display:flex;gap:12px;align-items:center;margin-top:10px;flex-wrap:wrap}
-    .btn-send{background:linear-gradient(135deg,#7ad1ff,#5ca9ff);color:#06101e}
-    .btn-alt{border:1px solid var(--line);background:transparent;color:var(--text)}
-
-    .inline-hint{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:.9rem}
-
-    /* Footer */
-    footer{border-top:1px solid var(--line);margin-top:36px;background:rgba(5,10,20,.6)}
-    .foot{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
-    @media (max-width:740px){.foot{flex-direction:column;gap:10px}}
-    .foot small{color:var(--muted)}
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工場ミニDX</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="nav">
-    <div class="container nav-inner">
-      <div class="logo">
-        <div class="logo-mark" aria-hidden></div>
-        <div class="logo-text">工場ミニDX</div>
-      </div>
-      <div class="nav-cta"><a href="#contact">お問い合わせ</a></div>
-    </div>
+  <header>
+    <div class="logo">工場ミニDX</div>
+    <nav>
+      <a href="#contact" class="btn">お問い合わせ</a>
+    </nav>
   </header>
 
-  <section class="hero">
-    <div class="container hero-wrap">
-      <div class="hero-copy">
-        <span class="eyebrow">中小向け 小さく始めるDX <span class="price-badge">最小5万円</span></span>
-        <h1>「DX外注は高額」が当たり前？<br>まずは<span style="color:var(--brand)">必要なところだけ</span>、小さく始めよう。</h1>
-        <p class="lead">フルスクラッチ・大規模導入ではなく、<strong>紙1枚の置き換え</strong>や<strong>1工程の見える化</strong>から。<br>短期間・低コストで効果を確認し、段階的に拡張します。</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="#contact">無料相談・見積り</a>
-          <a class="btn btn-ghost" href="#why">なぜ高額になるのか</a>
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <div class="badge">中小向け 小さく始めるDX</div>
+        <div class="price-badge">最小5万円</div>
+        <h1>「DX外注は高額」が当たり前？<br>
+          まずは<span class="highlight">必要なところだけ、</span><br>
+          小さく始めよう。</h1>
+        <p>
+          フルスクラッチ・大規模導入ではなく、紙1枚の置き換えや1工程の見える化から。<br>
+          短期間・低コストで効果を確認し、段階的に拡張します。
+        </p>
+        <div class="cta">
+          <a href="#contact" class="btn primary">無料相談・見積り</a>
+          <a href="#why" class="btn">なぜ高額になるのか</a>
         </div>
       </div>
       <div class="deco" aria-hidden>
         <div class="chip chip-1">💾 簡易ダッシュボード</div>
-      <div class="chip chip-4">⚙️ 在庫管理</div>
+        <div class="chip chip-2">📱 現場入力（スマホ/タブレット）</div>
+        <div class="chip chip-3">📊 日報自動作成</div>
+        <div class="chip chip-4">⚙️ 在庫管理</div>
         <div class="chip chip-5">⏱️ 作業時間の可視化</div>
         <div class="chip chip-6">🧾 見積・請求の自動化</div>
         <div class="chip chip-7">📦 出荷管理</div>
@@ -187,161 +43,23 @@
         <div class="chip chip-9">🛠️ 設備点検記録</div>
         <div class="chip chip-10">👥 人員シフト管理</div>
       </div>
-        <div class="chip chip-2">📱 現場入力（スマホ/タブレット）</div>
-        <div class="chip chip-3">📊 日報自動作成</div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="why">
-    <div class="container">
-      <h2>「外注＝高額」のワケと、工場ミニDXの方針</h2>
-      <p class="muted">大掛かりに作るから高い。だから、<strong>大きく作らない</strong>という選択肢を。</p>
-      <div class="grid3">
-        <div class="card"><h3>① フルスクラッチ前提</h3><p>全部入り要件で工数が膨張。まずは既存ツール×最小構成で試験導入。</p></div>
-        <div class="card"><h3>② 全面導入から着手</h3><p>最初は1工程/1帳票に限定。効果が見えたら範囲を広げます。</p></div>
-        <div class="card"><h3>③ 外部依存の固定費</h3><p>運用はできるだけ現場で回せるよう設計。保守もシンプルに。</p></div>
-      </div>
-      <div class="panel" style="margin-top:16px">
-        <p><strong>結論：</strong>最初から“全部”はやらない。<strong>最小5万円</strong>で小さく始め、ムダ打ちを減らします。</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="features">
-    <div class="container">
-      <h2>できること（必要最小限から）</h2>
-      <div class="grid3">
-        <div class="card"><h3>紙帳票のデジタル化</h3><p>スマホ/タブレットで入力。転記・二重入力を削減。</p></div>
-        <div class="card"><h3>進捗の見える化</h3><p>工程ごとのステータスを簡易ダッシュボードで共有。</p></div>
-        <div class="card"><h3>日報の自動作成</h3><p>入力データから日報・月報をワンクリック出力。</p></div>
-      </div>
-      <p class="muted" style="margin-top:12px">※IoT連携や拡張はご相談ください。スモール導入後に段階的に追加できます。</p>
-    </div>
-  </section>
-
-  <section id="pricing">
-    <div class="container pricing">
-      <div class="price-card">
-        <div class="price-title">スモール導入プラン</div>
-        <div class="price-main"><span class="yen">¥</span>50,000<span class="min">〜</span></div>
-        <ul class="price-list">
-          <li>対象：1帳票 or 1工程のデジタル化</li>
-          <li>簡易ダッシュボード（1画面）</li>
-          <li>初期設定・操作レクチャー</li>
-        </ul>
-        <div class="price-foot">まずは<strong>最小5万円</strong>で効果確認 → 有効なら拡張。</div>
-      </div>
-      <div class="panel">
-        <h3>よくある不安に先回り</h3>
-        <ul style="margin:10px 0 0 18px">
-          <li>短期間でできる？ → 範囲を絞るから短工期で開始可能</li>
-          <li>ITが苦手… → 操作はスマホ感覚。初期レクチャー付き</li>
-          <li>結局高くならない？ → 必要な時だけ拡張し、固定費を抑制</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container">
+    <section id="contact" class="contact">
       <h2>お問い合わせ</h2>
-      <div class="contact-wrap">
-        <form class="mailform" id="mailForm">
-          <div class="form-grid">
-            <div class="field">
-              <label class="label">会社名<span class="req">*</span></label>
-              <input class="inp" type="text" id="company" placeholder="例）〇〇製作所" required />
-              <div class="help">法人でない場合は屋号または「個人」とご記入ください。</div>
-            </div>
-            <div class="field">
-              <label class="label">ご担当者名<span class="req">*</span></label>
-              <input class="inp" type="text" id="name" placeholder="例）山田 太郎" required />
-            </div>
-            <div class="field">
-              <label class="label">電話番号</label>
-              <input class="inp" type="tel" id="tel" inputmode="tel" pattern="[0-9\-+ ]{10,}" placeholder="例）090-1234-5678" />
-              <div class="help">ハイフンあり/なし どちらでもOK</div>
-            </div>
-            <div class="field">
-              <label class="label">メールアドレス<span class="req">*</span></label>
-              <input class="inp" type="email" id="email" placeholder="例）taro@example.com" required />
-            </div>
-            <div class="field">
-              <label class="label">ご相談内容</label>
-              <select class="sel" id="topic">
-                <option value="紙帳票のデジタル化">紙帳票のデジタル化</option>
-                <option value="工程進捗の見える化">工程進捗の見える化</option>
-                <option value="日報の自動化">日報の自動化</option>
-                <option value="その他">その他</option>
-              </select>
-            </div>
-            <div class="field" style="grid-column:1/-1">
-              <label class="label">現場の課題・ご要望（任意）</label>
-              <textarea class="txt" id="message" rows="6" placeholder="現状の流れ／困っている点／改善したい数値など"></textarea>
-            </div>
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-send">送信する</button>
-            <div class="inline-hint"></div>
-          </div>
-          <div class="help" style="margin-top:8px">送信後、受付完了メッセージが表示されます。折り返しご連絡いたします。</div>
-        </form>
-        <div class="panel">
-          <h3>対応エリア / 進め方</h3>
-          <ol style="margin:10px 0 0 18px">
-            <li>オンラインで現場の課題をヒアリング（30〜45分）</li>
-            <li>スモール導入の提案（範囲・費用・期間）</li>
-            <li>最小5万円で試験導入 → 効果確認後に拡張</li>
-          </ol>
-          <p class="muted" style="margin-top:10px">※対面が必要な場合は別途交通費等をご相談させてください。</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      <p>下記フォームに基本情報をご入力ください。</p>
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <label>お名前<input type="text" name="name" required></label>
+        <label>会社名<input type="text" name="company"></label>
+        <label>メールアドレス<input type="email" name="email" required></label>
+        <label>ご要望<textarea name="message" required></textarea></label>
+        <button type="submit" class="btn primary">送信</button>
+      </form>
+    </section>
+  </main>
 
   <footer>
-    <div class="container foot">
-      <small>&copy; 2025 工場ミニDX</small>
-      <small class="muted"></small>
-    </div>
+    <p>© 2025 工場ミニDX - 最小5万円から始めるDX</p>
   </footer>
-
-  <script>
-    // 送信処理：Google Apps Script などの受け口にPOSTします（メールは非公開）
-    const form = document.getElementById('mailForm');
-    const ENDPOINT = 'https://script.google.com/macros/s/【ここにGASのURL】/exec'; // ←差し替え
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const v = (id) => document.getElementById(id).value.trim();
-      const payload = {
-        company: v('company'),
-        name: v('name'),
-        tel: v('tel'),
-        email: v('email'),
-        topic: v('topic'),
-        message: v('message')
-      };
-      if(!payload.company || !payload.name || !payload.email){
-        alert('会社名・ご担当者名・メールアドレスは必須です。');
-        return;
-      }
-      try{
-        const res = await fetch(ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const json = await res.json().catch(()=>({ok:false}));
-        if(!res.ok || !json.ok) throw new Error(json.error || '送信に失敗しました');
-        alert('送信しました。折り返しご連絡いたします。');
-        form.reset();
-      }catch(err){
-        console.error(err);
-        alert('送信に失敗しました。時間をおいて再度お試しください。');
-      }
-    });
-  </script>
 </body>
 </html>
