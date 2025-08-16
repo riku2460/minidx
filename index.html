@@ -257,11 +257,10 @@
             </div>
           </div>
           <div class="form-actions">
-            <button type="submit" class="btn btn-send">メールを作成</button>
-            <a class="btn btn-alt" href="mailto:n12.riku15@gmail.com">直接メールする</a>
-            <div class="inline-hint">宛先：<strong><a href="mailto:n12.riku15@gmail.com">n12.riku15@gmail.com</a></strong></div>
+            <button type="submit" class="btn btn-send">送信する</button>
+            <div class="inline-hint">※このフォームは安全に送信され、メールアドレスはサイト上に公開されません。</div>
           </div>
-          <div class="help" style="margin-top:8px">※「メールを作成」を押すと、内容が件名/本文に自動入力された状態でお使いのメールソフトが開きます（送信前に編集可）。</div>
+          <div class="help" style="margin-top:8px">送信後、受付完了メッセージが表示されます。折り返しご連絡いたします。</div>
         </form>
         <div class="panel">
           <h3>対応エリア / 進め方</h3>
@@ -279,46 +278,44 @@
   <footer>
     <div class="container foot">
       <small>&copy; 2025 工場ミニDX</small>
-      <small>お問い合わせ：<a href="mailto:n12.riku15@gmail.com">n12.riku15@gmail.com</a></small>
+      <small class="muted">お問い合わせは上部フォームよりお送りください（メールアドレスは非公開）</small>
     </div>
   </footer>
 
   <script>
-    // mailto生成 & 軽いバリデーション
+    // 送信処理：Google Apps Script などの受け口にPOSTします（メールは非公開）
     const form = document.getElementById('mailForm');
-    form.addEventListener('submit', (e) => {
+    const ENDPOINT = 'https://script.google.com/macros/s/【ここにGASのURL】/exec'; // ←差し替え
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const v = (id) => document.getElementById(id).value.trim();
-      const company = v('company');
-      const name = v('name');
-      const tel = v('tel');
-      const email = v('email');
-      const topic = v('topic');
-      const message = v('message');
-
-      if(!company || !name || !email){
+      const payload = {
+        company: v('company'),
+        name: v('name'),
+        tel: v('tel'),
+        email: v('email'),
+        topic: v('topic'),
+        message: v('message')
+      };
+      if(!payload.company || !payload.name || !payload.email){
         alert('会社名・ご担当者名・メールアドレスは必須です。');
         return;
       }
-
-      const subject = encodeURIComponent('【工場ミニDX】お問い合わせ（最小5万円プラン）');
-      const bodyLines = [
-        '以下の内容でお問い合わせします。',
-        '',
-        '■ 基本情報',
-        `会社名：${company}`,
-        `ご担当者名：${name}`,
-        `電話番号：${tel || '（未記入）'}`,
-        `メールアドレス：${email}`,
-        `ご相談内容：${topic}`,
-        '',
-        '■ 現場の課題・ご要望',
-        message || '（未記入）',
-        '',
-        '※このメールはサイトのフォームから作成されました。'
-      ];
-      const body = encodeURIComponent(bodyLines.join('\n'));
-      window.location.href = `mailto:n12.riku15@gmail.com?subject=${subject}&body=${body}`;
+      try{
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const json = await res.json().catch(()=>({ok:false}));
+        if(!res.ok || !json.ok) throw new Error(json.error || '送信に失敗しました');
+        alert('送信しました。折り返しご連絡いたします。');
+        form.reset();
+      }catch(err){
+        console.error(err);
+        alert('送信に失敗しました。時間をおいて再度お試しください。');
+      }
     });
   </script>
 </body>
