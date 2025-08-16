@@ -77,11 +77,28 @@
       border:1px solid var(--line);
       overflow:hidden;box-shadow:var(--shadow);
     }
-    .chip{position:absolute;inset:auto;display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:rgba(13,22,46,.7);backdrop-filter:blur(8px);border:1px solid var(--line);font-size:14px}
+    .chip{position:absolute;inset:auto;display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:rgba(13,22,46,.7);backdrop-filter:blur(8px);border:1px solid var(--line);font-size:14px;animation:floaty 6s ease-in-out infinite}
     .chip svg{opacity:.9}
-    .chip-1{top:18px;left:18px}
-    .chip-2{bottom:18px;left:18px}
-    .chip-3{top:18px;right:18px}
+    .chip-1{top:18px;left:18px;animation-delay:.1s}
+    .chip-2{bottom:18px;left:18px;animation-delay:.2s}
+    .chip-3{top:18px;right:18px;animation-delay:.3s}
+    .chip-4{top:80px;left:42%;animation-delay:.4s}
+    .chip-5{bottom:22px;right:22px;animation-delay:.5s}
+    .chip-6{top:50%;left:18px;transform:translateY(-50%);animation-delay:.6s}
+    .chip-7{top:50%;right:18px;transform:translateY(-50%);animation-delay:.7s}
+    .chip-8{bottom:90px;left:40%;animation-delay:.8s}
+    .chip-9{top:130px;right:120px;animation-delay:.9s}
+    .chip-10{bottom:150px;right:48%;animation-delay:1s}
+
+    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+    @media (max-width:980px){
+      .deco{height:320px}
+      .chip-7,.chip-9,.chip-10{display:none}
+      .chip-4{top:72px;left:50%;transform:translate(-50%,0)}
+      .chip-5{right:18px}
+      .chip-8{left:54%}
+    }
 
     /* ====== Pain/Solution ====== */
     section{padding:56px 0}
@@ -162,9 +179,7 @@
       </div>
       <div class="deco" aria-hidden>
         <div class="chip chip-1">💾 簡易ダッシュボード</div>
-        <div class="chip chip-2">📱 現場入力（スマホ/タブレット）</div>
-        <div class="chip chip-3">📊 日報自動作成</div>
-        <div class="chip chip-4">⚙️ 在庫管理</div>
+      <div class="chip chip-4">⚙️ 在庫管理</div>
         <div class="chip chip-5">⏱️ 作業時間の可視化</div>
         <div class="chip chip-6">🧾 見積・請求の自動化</div>
         <div class="chip chip-7">📦 出荷管理</div>
@@ -288,7 +303,7 @@
   <footer>
     <div class="container foot">
       <small>&copy; 2025 工場ミニDX</small>
-      <small class="muted">お問い合わせは上部フォームよりお送りください</small>
+      <small class="muted"></small>
     </div>
   </footer>
 
