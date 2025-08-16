@@ -3,53 +3,214 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>工場ミニDX - 中小工場向けDX支援</title>
-  <link rel="stylesheet" href="style.css">
+  <title>工場ミニDXサイト</title>
+  <style>
+    :root {
+      --bg: #0e1525;
+      --fg: #ffffff;
+      --accent: #4fc3f7;
+      --line: rgba(255,255,255,0.2);
+    }
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+    header {
+      text-align:center;
+      padding: 4rem 2rem 2rem;
+      background: linear-gradient(135deg, #1e2a3a, #0e1525 70%);
+    }
+    header h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    header p { font-size: 1.2rem; color: #ccc; }
+
+    section {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 2rem;
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--accent);
+      display:inline-block;
+    }
+
+    .deco{
+      position:relative;
+      width:100%;
+      height:auto;
+      min-height:320px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:center;
+      align-items:center;
+      padding:10px;
+    }
+    .chip{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 14px;
+      border-radius:12px;
+      background:rgba(13,22,46,.75);
+      backdrop-filter:blur(8px);
+      border:1px solid var(--line);
+      font-size:14px;
+      animation:floaty 6s ease-in-out infinite;
+      max-width:220px;
+      flex:0 1 220px;
+      white-space:normal;
+      word-break:break-word;
+      overflow-wrap:anywhere;
+    }
+    @keyframes floaty {
+      0%,100%{ transform:translateY(0); }
+      50%{ transform:translateY(-4px); }
+    }
+
+    .price {
+      text-align:center;
+      margin:2rem 0;
+    }
+    .price-badge {
+      display:inline-block;
+      padding: 1rem 2rem;
+      font-size:1.6rem;
+      background: var(--accent);
+      color:#000;
+      border-radius: 12px;
+      font-weight:bold;
+    }
+
+    form {
+      background: rgba(255,255,255,0.05);
+      padding:2rem;
+      border-radius:12px;
+      box-shadow:0 4px 16px rgba(0,0,0,0.4);
+    }
+    form label {
+      display:block;
+      margin-top:1rem;
+      margin-bottom:0.3rem;
+      font-weight:bold;
+    }
+    form input, form textarea {
+      width:100%;
+      padding:0.8rem;
+      border-radius:8px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.1);
+      color:var(--fg);
+    }
+    form button {
+      margin-top:1.5rem;
+      padding:1rem 2rem;
+      border:none;
+      border-radius:8px;
+      background:var(--accent);
+      color:#000;
+      font-size:1rem;
+      font-weight:bold;
+      cursor:pointer;
+      transition: background 0.3s;
+    }
+    form button:hover { background:#81d4fa; }
+
+    footer {
+      text-align:center;
+      padding:2rem;
+      font-size:0.9rem;
+      color:#aaa;
+    }
+  </style>
 </head>
 <body>
-  <header class="hero">
-    <h1>工場ミニDX</h1>
-    <p>中小向け・低コストで始める小さなデジタル化</p>
-    <p class="price">最小 <span>5万円〜</span> 導入可能！</p>
-  </header>
 
-  <!-- デコレーションチップ -->
+<header>
+  <h1>工場ミニDXサービス</h1>
+  <p>中小工場向けの低コスト・短期間のデジタル化支援</p>
+</header>
+
+<section>
+  <h2>なぜ必要？</h2>
+  <p>
+    DXを外注すると「高額・長期間」が当たり前と思われています。  
+    しかし私たちの「工場ミニDX」なら、必要な機能だけを小さく導入。  
+    短期間・低コストで導入可能です。維持費も不要、デジタル初心者でも扱いやすい設計が可能です。
+  </p>
+</section>
+
+<section>
+  <h2>できること</h2>
   <div class="deco" aria-hidden>
-    <div class="chip chip-1">💾 簡易ダッシュボード</div>
-    <div class="chip chip-2">📱 現場入力（スマホ/タブレット）</div>
-    <div class="chip chip-3">📊 日報自動作成</div>
-    <div class="chip chip-4">⚙️ 在庫管理</div>
-    <div class="chip chip-5">⏱️ 作業時間の可視化</div>
-    <div class="chip chip-6">🧾 見積・請求の自動化</div>
-    <div class="chip chip-7">📦 出荷管理</div>
-    <div class="chip chip-8">📈 売上レポート</div>
-    <div class="chip chip-9">🛠️ 設備点検記録</div>
-    <div class="chip chip-10">👥 人員シフト管理</div>
+    <div class="chip">💾 簡易ダッシュボード</div>
+    <div class="chip">📱 現場入力（スマホ/タブレット）</div>
+    <div class="chip">📊 日報自動作成</div>
+    <div class="chip">⚙️ 在庫管理</div>
+    <div class="chip">⏱️ 作業時間の可視化</div>
+    <div class="chip">🧾 見積・請求の自動化</div>
+    <div class="chip">📦 出荷管理</div>
+    <div class="chip">📈 売上レポート</div>
+    <div class="chip">🛠️ 設備点検記録</div>
+    <div class="chip">👥 人員シフト管理</div>
   </div>
+</section>
 
-  <section class="intro">
-    <h2>なぜ「工場ミニDX」なのか？</h2>
-    <p>大手に外注すると数百万円かかることも珍しくありません。<br>
-       しかし「小さく始めて成果を出す」ことが中小企業には重要です。<br>
-       工場ミニDXでは、<strong>最小5万円〜</strong> の低コストで導入可能。<br>
-       デジタル初心者でもメンテナンス可能で維持費はかかりません。</p>
-  </section>
+<section class="price">
+  <h2>料金</h2>
+  <div class="price-badge">最小 5万円〜</div>
+  <p>「最低限ここから」始められる安心プラン</p>
+</section>
 
-  <section class="contact">
-    <h2>お問い合わせ</h2>
-    <p>下記フォームに基本情報をご記入ください。</p>
-    <form action="https://formspree.io/f/your-endpoint" method="POST">
-      <label>会社名 <input type="text" name="company" required></label>
-      <label>ご担当者名 <input type="text" name="name" required></label>
-      <label>メールアドレス <input type="email" name="email" required></label>
-      <label>電話番号 <input type="tel" name="tel"></label>
-      <label>お問い合わせ内容 <textarea name="message" required></textarea></label>
-      <button type="submit">送信する</button>
-    </form>
-  </section>
+<section>
+  <h2>お問い合わせ</h2>
+  <p>以下のフォームからお問い合わせください。（メールアドレスは公開されません）</p>
+  <form id="contact-form">
+    <label for="name">お名前*</label>
+    <input type="text" id="name" name="name" required>
 
-  <footer>
-    <p>© 2025 工場ミニDX</p>
-  </footer>
+    <label for="company">会社名</label>
+    <input type="text" id="company" name="company">
+
+    <label for="email">メールアドレス*</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">お問い合わせ内容*</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">送信する</button>
+  </form>
+  <p id="result"></p>
+</section>
+
+<footer>
+  <p>© 2025 工場ミニDX</p>
+</footer>
+
+<script>
+  const ENDPOINT = "https://script.google.com/macros/s/【ここにGASのURL】/exec";
+
+  document.getElementById("contact-form").addEventListener("submit", async function(e){
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    try {
+      const res = await fetch(ENDPOINT, { method: "POST", body: data });
+      if (res.ok) {
+        document.getElementById("result").textContent = "送信が完了しました。ありがとうございます！";
+        form.reset();
+      } else {
+        document.getElementById("result").textContent = "送信に失敗しました。時間をおいて再度お試しください。";
+      }
+    } catch (err) {
+      document.getElementById("result").textContent = "エラーが発生しました。";
+    }
+  });
+</script>
+
 </body>
 </html>
