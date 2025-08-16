@@ -430,8 +430,10 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <noscript><div style="background:#300;color:#fff;padding:10px;text-align:center">このサイトはJavaScriptを使用しています。無効の場合、送信が行えません。</div></noscript>
-<script>
-  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwqxVYdVsV7Lr4Ju4Kwo8kauxLym7kuhwnkj-62nTLdQKTCBAAKY65CHYOJAYIGWXfqZg/exec';
+
+  <script>
+  // ★ /exec で終わる最新のウェブアプリURLに差し替え
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyf7Dj5p-IXGNk2_BYSFhpho40ujG_A_yMIw8zP_hKVdgRN703AncgXrhtiJyLtIrdVgg/exec';
 
   const form = document.getElementById('mailForm');
   const toast = document.getElementById('toast');
@@ -445,34 +447,35 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const v = id => document.getElementById(id).value.trim();
-    const payload = {
-      company: v('company'),
-      name: v('name'),
-      tel: v('tel'),
-      email: v('email'),
-      topic: v('topic'),
-      message: v('message')
-    };
-    if (!payload.company || !payload.name || !payload.email) {
+
+    // 必須チェック
+    if(!v('company') || !v('name') || !v('email')){
       showToast('会社名・ご担当者名・メールアドレスは必須です。', false);
       return;
     }
-    try {
-      const res = await fetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      const json = await res.json().catch(()=>({ok:false, error:'JSON parse error'}));
-      if (!res.ok || !json.ok) throw new Error(json.error || `HTTP ${res.status}`);
+
+    // ★ FormDataで送る（ヘッダーは付けない＝プリフライト回避）
+    const fd = new FormData();
+    fd.append('company', v('company'));
+    fd.append('name', v('name'));
+    fd.append('tel', v('tel'));
+    fd.append('email', v('email'));
+    fd.append('topic', v('topic'));
+    fd.append('message', v('message'));
+
+    try{
+      const res  = await fetch(ENDPOINT, { method: 'POST', body: fd });
+      const text = await res.text();
+      if(!res.ok || !/ok/i.test(text)) throw new Error(text || `HTTP ${res.status}`);
       form.reset();
       showToast('送信しました。折り返しご連絡いたします。', true);
-    } catch (err) {
+    }catch(err){
       console.error(err);
       showToast('送信に失敗しました。時間をおいて再度お試しください。', false);
     }
   });
 </script>
+
 
 </body>
 </html>
