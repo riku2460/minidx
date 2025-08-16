@@ -6,29 +6,22 @@
   <title>工場ミニDX｜最小5万円で始める小さなデジタル化</title>
   <meta name="description" content="中小製造業向け・外注は高額が当たり前？必要なところだけを小さく。最小5万円から短期間導入、維持費不要。デジタル初心者でもメンテ可能な設計で伴走します。">
   <style>
-    /* ===== CSS Reset (軽量) ===== */
+    /* ===== Reset ===== */
     *,*::before,*::after{box-sizing:border-box}
     html,body{margin:0;padding:0}
-    img{max-width:100%;display:block}
+    img,svg{display:block;max-width:100%}
     button,input,select,textarea{font:inherit}
 
-    /* ===== Theme Tokens ===== */
+    /* ===== Theme ===== */
     :root{
-      --bg:#0b1220;
-      --bg-2:#0f1730;
-      --fg:#e8eef9;
-      --fg-muted:#a8b0c3;
-      --brand:#69b3ff;
-      --accent:#ffd166;
-      --ok:#15d1b1;
-      --line:#223055;
-      --glass: rgba(17,25,45,.55);
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --bg:#0b1220; --bg-2:#0f1730;
+      --fg:#e8eef9; --fg-muted:#a8b0c3;
+      --brand:#69b3ff; --accent:#ffd166; --ok:#15d1b1;
+      --line:#223055; --glass:rgba(17,25,45,.55);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
       --r-sm:12px; --r-md:16px; --r-lg:22px;
       --max:1200px;
     }
-
-    /* ===== Base ===== */
     body{
       font-family: "Noto Sans JP", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       color:var(--fg);
@@ -39,131 +32,83 @@
       letter-spacing:.02em;
     }
     .container{max-width:var(--max);margin:0 auto;padding:0 24px}
+    a{color:var(--brand);text-decoration:none}
 
     /* ===== Nav ===== */
-    .nav{
-      position:sticky; top:0; z-index:30;
-      backdrop-filter: saturate(140%) blur(10px);
-      background: linear-gradient(180deg, rgba(10,16,30,.85), rgba(10,16,30,.3));
-      border-bottom:1px solid var(--line);
-    }
+    .nav{position:sticky;top:0;z-index:30;backdrop-filter:saturate(140%) blur(10px);
+      background:linear-gradient(180deg, rgba(10,16,30,.85), rgba(10,16,30,.3));border-bottom:1px solid var(--line)}
     .nav-inner{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
     .logo{display:flex;align-items:center;gap:12px;font-weight:800}
     .logo-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#63b6ff,#7fd4ff);box-shadow:0 6px 18px rgba(120,190,255,.45)}
     .logo-text{letter-spacing:.04em}
-    .nav a.btn{padding:10px 14px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--fg)}
-    .nav a.btn:hover{border-color:#2c3b66}
+    .nav a.btn{padding:10px 14px;border:1px solid var(--line);border-radius:10px;color:var(--fg)}
+    .nav a.btn:hover{border-color:#2e4278}
+
+    /* ===== Buttons ===== */
+    .btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:14px;padding:12px 18px;font-weight:900;cursor:pointer;transition:transform .06s ease,opacity .2s ease,box-shadow .2s ease}
+    .btn-primary{background:linear-gradient(135deg,#73bbff,#4ea0ff);color:#041224;box-shadow:0 10px 20px rgba(79,157,255,.28)}
+    .btn-primary:hover{transform:translateY(-1px)}
+    .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--fg)}
+    .btn-ghost:hover{border-color:#2f457e}
 
     /* ===== Hero ===== */
     .hero{padding:80px 0 54px}
     .hero-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
     @media (max-width:980px){.hero-wrap{grid-template-columns:1fr}}
-    .hero-copy{
-      border:1px solid var(--line); border-radius:var(--r-lg);
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      box-shadow:var(--shadow); padding:22px;
-    }
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:6px 10px;border-radius:999px;
-      background:rgba(105,179,255,.16); color:#d9ebff;
-      font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-    }
-    .badge{display:inline-flex;align-items:center;gap:6px;margin-left:8px;
-      padding:6px 12px;border-radius:999px;border:1px solid rgba(255,209,102,.35);
-      background:rgba(255,209,102,.18); color:var(--accent); font-weight:900}
+    .hero-copy{border:1px solid var(--line);border-radius:var(--r-lg);background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));box-shadow:var(--shadow);padding:22px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(105,179,255,.16);color:#d9ebff;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+    .badge{display:inline-flex;align-items:center;gap:6px;margin-left:8px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,209,102,.35);background:rgba(255,209,102,.18);color:var(--accent);font-weight:900}
     h1{font-size:clamp(26px,4.6vw,46px);line-height:1.25;margin:12px 0 8px}
     .lead{color:var(--fg-muted);font-size:clamp(15px,2.2vw,18px)}
     .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;
-      border:0;border-radius:14px;padding:12px 18px;font-weight:900;cursor:pointer;
-      text-decoration:none;transition:transform .06s ease, opacity .2s ease, box-shadow .2s ease;
-    }
-    .btn-primary{background:linear-gradient(135deg,#73bbff,#4ea0ff);color:#041224; box-shadow:0 10px 20px rgba(79,157,255,.28)}
-    .btn-primary:hover{transform:translateY(-1px)}
-    .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--fg)}
-    .btn-ghost:hover{border-color:#2f457e}
 
-    /* ===== Hero Visual (Chips as grid) ===== */
-    .deco{
-      border:1px solid var(--line); border-radius:var(--r-lg);
-      background:
-        radial-gradient(50% 40% at 50% 0%, rgba(100,170,255,.18), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-      padding:18px; display:grid; gap:12px;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-    }
-    @media (max-width:980px){.deco{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media (max-width:520px){.deco{grid-template-columns:1fr}}
-    .chip{
-      display:flex;gap:10px;align-items:center;justify-content:flex-start;
-      padding:12px 14px;border-radius:12px;border:1px solid var(--line);
-      background:var(--glass);backdrop-filter: blur(8px);
-      font-size:14px; min-height:44px;
-      animation:floaty 6.5s ease-in-out infinite;
-      white-space:normal; word-break:break-word; overflow-wrap:anywhere;
-    }
-    .chip:nth-child(3n){animation-delay:.25s}
-    .chip:nth-child(2n){animation-delay:.5s}
-    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    /* ===== Hero Illustration (SVG) ===== */
+    .hero-art{border:1px solid var(--line);border-radius:var(--r-lg);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));box-shadow:var(--shadow);padding:14px}
+    .pulse{animation:pulse 2.2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
 
     /* ===== Sections ===== */
     section{padding:60px 0}
     h2{font-size:clamp(22px,3.2vw,30px);margin:0 0 12px}
     .muted{color:var(--fg-muted)}
-
-    .grid-3{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
-    @media (max-width:980px){.grid-3{grid-template-columns:1fr}}
+    .grid-3{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)} @media (max-width:980px){.grid-3{grid-template-columns:1fr}}
     .card{background:var(--glass);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;box-shadow:var(--shadow)}
     .card h3{margin:0 0 6px;font-size:18px}
+    .panel{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--line);border-radius:var(--r-md);padding:18px;box-shadow:var(--shadow)}
 
-    .panel{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
-      border:1px solid var(--line);border-radius:var(--r-md);padding:18px;box-shadow:var(--shadow)}
+    /* ===== Chips Grid ===== */
+    .deco{border:1px solid var(--line);border-radius:var(--r-lg);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));box-shadow:var(--shadow);padding:18px;display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:980px){.deco{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:520px){.deco{grid-template-columns:1fr}}
+    .chip{display:flex;gap:10px;align-items:center;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(8px);font-size:14px;min-height:44px;animation:floaty 6.5s ease-in-out infinite;white-space:normal;word-break:break-word;overflow-wrap:anywhere}
+    .chip:nth-child(3n){animation-delay:.25s}
+    .chip:nth-child(2n){animation-delay:.5s}
+    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 
-    /* ===== Pricing ===== */
-    .pricing{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:stretch}
-    @media (max-width:980px){.pricing{grid-template-columns:1fr}}
-    .price-card{background:var(--glass);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow)}
-    .price-title{font-weight:800;color:#d9eaff}
-    .price-main{font-size:46px;font-weight:900;letter-spacing:.4px;margin:6px 0}
-    .price-main .yen{font-size:.6em;margin-right:4px;color:var(--fg-muted)}
-    .price-main .min{font-size:.5em;margin-left:2px;color:var(--fg-muted)}
-    .price-list{margin:10px 0 0 18px}
-    .price-list li{margin:6px 0}
-    .price-foot{margin-top:10px;color:var(--fg-muted)}
+    /* ===== Timeline ===== */
+    .timeline{position:relative;padding-left:14px}
+    .timeline::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:var(--line)}
+    .step{position:relative;margin:14px 0 14px 14px}
+    .dot{position:absolute;left:-22px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(105,179,255,.18)}
 
-    /* ===== Contact Form ===== */
-    .contact-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
-    @media (max-width:980px){.contact-wrap{grid-template-columns:1fr}}
+    /* ===== Contact ===== */
+    .contact-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:20px} @media (max-width:980px){.contact-wrap{grid-template-columns:1fr}}
     form.mailform{background:var(--glass);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow)}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    @media (max-width:780px){.form-grid{grid-template-columns:1fr}}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px} @media (max-width:780px){.form-grid{grid-template-columns:1fr}}
     .field{display:flex;flex-direction:column;gap:8px}
     .label{font-size:.92rem;color:#d3dbef;font-weight:800;letter-spacing:.06em}
     .req{color:var(--accent);margin-left:6px}
-    .inp,.sel,.txt{
-      width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));
-      color:var(--fg);font-size:16px;outline:none;transition:border .2s ease, box-shadow .2s ease;
-    }
+    .inp,.sel,.txt{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));color:var(--fg);font-size:16px;outline:none;transition:border .2s ease,box-shadow .2s ease}
     .inp:focus,.sel:focus,.txt:focus{border-color:#32539b;box-shadow:0 0 0 4px rgba(105,179,255,.18)}
     .help{color:var(--fg-muted);font-size:.85rem}
     .form-actions{display:flex;gap:12px;align-items:center;margin-top:10px;flex-wrap:wrap}
     .btn-send{background:linear-gradient(135deg,#7fd4ff,#63b6ff);color:#071321}
     .inline-hint{display:flex;gap:10px;align-items:center;color:var(--fg-muted);font-size:.9rem}
 
-    /* ===== Toast (送信結果) ===== */
-    .toast{
-      position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);
-      background:#07101e; color:var(--fg); border:1px solid var(--line);
-      padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);
-      opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease;
-    }
+    /* ===== Toast ===== */
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#07101e;color:var(--fg);border:1px solid var(--line);padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease}
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-    .toast.ok{border-color:rgba(21,209,177,.4)}
-    .toast.ng{border-color:rgba(255,90,90,.4)}
+    .toast.ok{border-color:rgba(21,209,177,.4)} .toast.ng{border-color:rgba(255,90,90,.4)}
 
     /* ===== Footer ===== */
     footer{border-top:1px solid var(--line);margin-top:36px;background:rgba(5,10,20,.6)}
@@ -190,30 +135,70 @@
       <div class="hero-copy">
         <span class="eyebrow">中小向け 小さく始めるDX <span class="badge">最小5万円</span></span>
         <h1>「DX外注は高額」が当たり前？<br>必要なところだけを<span style="color:var(--brand)">小さく、素早く。</span></h1>
-        <p class="lead">大規模スクラッチではなく、<strong>紙1枚の置き換え</strong>や<strong>1工程の見える化</strong>から。<br>短期間・低コストで効果確認。<strong>維持費はかかりません</strong>。<strong>デジタル初心者でもメンテ可能</strong>な設計で伴走します。</p>
+        <p class="lead">
+          大規模スクラッチではなく、<strong>紙1枚の置き換え</strong>や<strong>1工程の見える化</strong>から。短期間・低コストで効果確認。<strong>維持費はかかりません</strong>。<strong>デジタル初心者でもメンテ可能</strong>な設計で伴走します。
+        </p>
         <div class="actions">
           <a class="btn btn-primary" href="#contact">無料相談・見積り</a>
-          <a class="btn btn-ghost" href="#why">なぜ高額になるのか</a>
+          <a class="btn btn-ghost" href="#story">なぜこのサービス？</a>
         </div>
       </div>
 
-      <!-- 視覚要素（グリッド状チップ） -->
-      <div class="deco" aria-hidden="true">
-        <div class="chip">💾 簡易ダッシュボード</div>
-        <div class="chip">📱 現場入力（スマホ/タブレット）</div>
-        <div class="chip">📊 日報自動作成</div>
-        <div class="chip">⚙️ 在庫管理</div>
-        <div class="chip">⏱️ 作業時間の可視化</div>
-        <div class="chip">🧾 見積・請求の自動化</div>
-        <div class="chip">📦 出荷管理</div>
-        <div class="chip">📈 売上レポート</div>
-        <div class="chip">🛠️ 設備点検記録</div>
-        <div class="chip">👥 人員シフト管理</div>
-        <div class="chip">🔗 IoTセンサー連携</div>
-        <div class="chip">🧪 小規模PoC対応</div>
+      <!-- Hero Illustration：工場×ダッシュボード（SVG） -->
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 740 420" role="img" aria-label="工場とダッシュボードのイラスト">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0ea5e9"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#93c5fd" stop-opacity=".6"/>
+            </linearGradient>
+          </defs>
+          <!-- 工場 -->
+          <rect x="20" y="230" width="260" height="140" rx="12" fill="url(#g1)" opacity=".85"/>
+          <rect x="40" y="260" width="50" height="50" fill="#1f2937"/><rect x="100" y="260" width="50" height="50" fill="#1f2937"/>
+          <rect x="160" y="260" width="50" height="50" fill="#1f2937"/><rect x="220" y="260" width="40" height="110" fill="#1f2937"/>
+          <rect x="70" y="210" width="16" height="20" fill="#9ca3af"/><rect x="110" y="200" width="16" height="30" fill="#9ca3af"/>
+          <rect x="150" y="190" width="16" height="40" fill="#9ca3af"/>
+
+          <!-- ダッシュボード -->
+          <rect x="320" y="40" width="400" height="250" rx="12" fill="url(#g2)" opacity=".9"/>
+          <rect x="340" y="60" width="360" height="24" rx="6" fill="#111827" opacity=".6"/>
+          <rect x="340" y="100" width="120" height="16" rx="4" fill="#0f172a"/>
+          <rect x="470" y="100" width="100" height="16" rx="4" fill="#0f172a" class="pulse"/>
+          <!-- 棒グラフ -->
+          <g transform="translate(340,130)">
+            <rect width="28" height="80" x="0"   y="40" fill="#1e293b"/>
+            <rect width="28" height="70" x="40"  y="50" fill="#1e293b"/>
+            <rect width="28" height="110" x="80" y="10" fill="#2563eb"/>
+            <rect width="28" height="60" x="120" y="60" fill="#1e293b"/>
+            <rect width="28" height="95" x="160" y="25" fill="#60a5fa"/>
+          </g>
+          <!-- 折れ線 -->
+          <polyline points="340,220 380,210 420,230 460,200 500,205 540,180 580,188 620,160 660,170"
+                    fill="none" stroke="#22d3ee" stroke-width="3" opacity=".8"/>
+          <!-- デバイス -->
+          <rect x="520" y="310" width="110" height="70" rx="10" fill="#0f172a" stroke="#1f2937"/>
+          <rect x="535" y="322" width="80" height="10" rx="4" fill="#1f2937"/>
+          <rect x="535" y="340" width="60" height="10" rx="4" fill="#1f2937" class="pulse"/>
+        </svg>
       </div>
     </div>
   </header>
+
+  <!-- ===== Story ===== -->
+  <section id="story">
+    <div class="container">
+      <h2>なぜ「工場ミニDX」なのか</h2>
+      <div class="panel">
+        <p>
+          私は、中小工場の現場で<strong>紙とエクセル</strong>に追われる日々を見てきました。立派な大規模システムはありますが、<strong>「最初の一歩」には重い</strong>のが実情です。<br>
+          工場ミニDXは、<strong>必要最小限の機能</strong>から始めるアプローチ。たとえば「紙1枚をスマホ化」「1工程の見える化」など、<strong>小さく・早く・安く</strong>始めて、効果が見えたら広げていきます。
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- ===== Why High ===== -->
   <section id="why">
@@ -231,15 +216,25 @@
     </div>
   </section>
 
-  <!-- ===== Features ===== -->
+  <!-- ===== Use cases & Chips ===== -->
   <section id="features">
     <div class="container">
       <h2>できること（必要最小限から）</h2>
-      <div class="grid-3">
-        <div class="card"><h3>紙帳票のデジタル化</h3><p>スマホ/タブレットで入力。転記・二重入力を削減。</p></div>
-        <div class="card"><h3>進捗の見える化</h3><p>工程ごとのステータスを簡易ダッシュボードで共有。</p></div>
-        <div class="card"><h3>日報の自動作成</h3><p>入力データから日報・月報をワンクリック出力。</p></div>
+      <div class="deco" aria-hidden="true">
+        <div class="chip">💾 簡易ダッシュボード</div>
+        <div class="chip">📱 現場入力（スマホ/タブレット）</div>
+        <div class="chip">📊 日報自動作成</div>
+        <div class="chip">⚙️ 在庫管理</div>
+        <div class="chip">⏱️ 作業時間の可視化</div>
+        <div class="chip">🧾 見積・請求の自動化</div>
+        <div class="chip">📦 出荷管理</div>
+        <div class="chip">📈 売上レポート</div>
+        <div class="chip">🛠️ 設備点検記録</div>
+        <div class="chip">👥 人員シフト管理</div>
+        <div class="chip">🔗 IoTセンサー連携</div>
+        <div class="chip">🧪 小規模PoC対応</div>
       </div>
+
       <div class="panel" style="margin-top:16px">
         <strong>運用ポリシー</strong>
         <ul style="margin:8px 0 0 18px">
@@ -250,26 +245,116 @@
     </div>
   </section>
 
+  <!-- ===== Before & After (SVG) ===== -->
+  <section id="before-after">
+    <div class="container">
+      <h2>Before → After（小さな投資で確実に改善）</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Before：紙中心・見えない進捗</h3>
+          <svg viewBox="0 0 320 120" aria-label="紙と転記">
+            <rect x="10" y="15" width="120" height="90" rx="8" fill="#374151"/><line x1="22" y1="40" x2="118" y2="40" stroke="#9ca3af" stroke-width="4"/>
+            <line x1="22" y1="60" x2="118" y2="60" stroke="#6b7280" stroke-width="4"/><line x1="22" y1="80" x2="118" y2="80" stroke="#6b7280" stroke-width="4"/>
+            <path d="M150 60 H300" stroke="#ef4444" stroke-width="6" stroke-dasharray="6 6"/>
+          </svg>
+          <p class="muted">記入→転記→二重入力。現場が忙しいほど情報が遅れがち。</p>
+        </div>
+        <div class="card">
+          <h3>After：その場で入力・即共有</h3>
+          <svg viewBox="0 0 320 120" aria-label="端末入力と共有">
+            <rect x="10" y="20" width="70" height="80" rx="10" fill="#0f172a" stroke="#1f2937"/>
+            <rect x="20" y="34" width="50" height="8" rx="4" fill="#1f2937"/>
+            <rect x="20" y="50" width="40" height="8" rx="4" fill="#1f2937"/>
+            <rect x="20" y="66" width="30" height="8" rx="4" fill="#60a5fa"/>
+            <path d="M95 60 H305" stroke="#22d3ee" stroke-width="6"/>
+          </svg>
+          <p class="muted">スマホ/タブレットで入力 → 共有。現場-事務の距離がゼロに。</p>
+        </div>
+        <div class="card">
+          <h3>可視化：日/週/月レポート</h3>
+          <svg viewBox="0 0 320 120" aria-label="ダッシュボード">
+            <rect x="10" y="20" width="300" height="80" rx="10" fill="#0f172a" stroke="#1f2937"/>
+            <rect x="22" y="32" width="80" height="8" rx="4" fill="#1f2937"/>
+            <g transform="translate(22,48)">
+              <rect width="18" height="48" x="0"   y="0" fill="#1e293b"/>
+              <rect width="18" height="28" x="24"  y="20" fill="#1e293b"/>
+              <rect width="18" height="60" x="48"  y="-12" fill="#2563eb"/>
+              <rect width="18" height="36" x="72"  y="12" fill="#1e293b"/>
+              <rect width="18" height="54" x="96"  y="-6" fill="#60a5fa"/>
+            </g>
+          </svg>
+          <p class="muted">成果が見えるから、次の一手も決めやすい。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Process Timeline ===== -->
+  <section id="process">
+    <div class="container">
+      <h2>導入の流れ（最短スタート）</h2>
+      <div class="timeline">
+        <div class="step"><span class="dot"></span><strong>1. ヒアリング（30〜45分）</strong><br><span class="muted">現状・課題・ゴールを確認。まずは「1工程・1帳票」に絞ります。</span></div>
+        <div class="step"><span class="dot"></span><strong>2. 提案（範囲・費用・期間）</strong><br><span class="muted">最小構成での具体案をご提示。維持費ゼロの構成を基本とします。</span></div>
+        <div class="step"><span class="dot"></span><strong>3. 試験導入（最小5万円〜）</strong><br><span class="muted">短期間で形に。現場で触って納得していただきます。</span></div>
+        <div class="step"><span class="dot"></span><strong>4. 効果確認 → 拡張</strong><br><span class="muted">数字と現場の手応えを見て、必要なら次の工程へ。</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== Pricing ===== -->
   <section id="pricing">
-    <div class="container pricing">
-      <div class="price-card">
-        <div class="price-title">スモール導入プラン</div>
-        <div class="price-main"><span class="yen">¥</span>50,000<span class="min">〜</span></div>
-        <ul class="price-list">
-          <li>対象：1帳票 or 1工程のデジタル化</li>
-          <li>簡易ダッシュボード（1画面）</li>
-          <li>初期設定・操作レクチャー</li>
-        </ul>
-        <div class="price-foot">まずは<strong>最小5万円</strong>で効果確認 → 有効なら拡張。</div>
+    <div class="container">
+      <h2>料金（まずは小さく試す）</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>スモール導入プラン</h3>
+          <p class="muted">対象：1帳票 or 1工程のデジタル化</p>
+          <p style="font-size:32px;font-weight:900;margin:6px 0"><span style="font-size:.6em;color:var(--fg-muted)">¥</span>50,000<span style="font-size:.6em;color:var(--fg-muted)">〜</span></p>
+          <ul style="margin:8px 0 0 18px">
+            <li>簡易ダッシュボード（1画面）</li>
+            <li>初期設定・操作レクチャー</li>
+            <li>維持費ゼロ構成</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>拡張・追加（任意）</h3>
+          <p class="muted">必要に応じて段階的に拡張</p>
+          <ul style="margin:8px 0 0 18px">
+            <li>帳票の追加・統合</li>
+            <li>IoTセンサー連携</li>
+            <li>権限や監査ログの強化</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>よくある不安</h3>
+          <ul style="margin:8px 0 0 18px">
+            <li>短期間でできる？ → 範囲を絞るから短工期で開始可能</li>
+            <li>ITが苦手… → 操作はスマホ感覚。初期レクチャー付き</li>
+            <li>結局高くならない？ → 必要時のみ拡張し固定費を抑制</li>
+          </ul>
+        </div>
       </div>
-      <div class="panel">
-        <h3>よくある不安に先回り</h3>
-        <ul style="margin:10px 0 0 18px">
-          <li>短期間でできる？ → 範囲を絞るから短工期で開始可能</li>
-          <li>ITが苦手… → 操作はスマホ感覚。初期レクチャー付き</li>
-          <li>結局高くならない？ → 必要時のみ拡張し、固定費を抑制</li>
-        </ul>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq">
+    <div class="container">
+      <h2>よくある質問</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Q. 保守費や月額はかかりますか？</h3>
+          <p class="muted">いいえ。原則、<strong>維持費はかかりません</strong>。無料枠を活用した構成を基本とします（将来の外部SaaS導入時のみ別費用が必要な場合があります）。</p>
+        </div>
+        <div class="card">
+          <h3>Q. 実績が少ないのが不安です</h3>
+          <p class="muted">だからこそ、<strong>小さく試せる</strong>形でご提案します。まずは1工程/1帳票で成果を確認しましょう。</p>
+        </div>
+        <div class="card">
+          <h3>Q. 現場での操作は難しくない？</h3>
+          <p class="muted">スマホ/タブレット前提で設計。<strong>デジタル初心者でもメンテ可能</strong>なUI/運用にします。</p>
+        </div>
       </div>
     </div>
   </section>
@@ -279,7 +364,6 @@
     <div class="container">
       <h2>お問い合わせ</h2>
       <div class="contact-wrap">
-        <!-- 送信フォーム（メール非公開・サーバーレスPOST） -->
         <form class="mailform" id="mailForm" novalidate>
           <div class="form-grid">
             <div class="field">
@@ -314,7 +398,6 @@
               <textarea class="txt" id="message" rows="6" placeholder="現状の流れ／困っている点／改善したい数値など"></textarea>
             </div>
           </div>
-
           <div class="form-actions">
             <button type="submit" class="btn btn-send">送信する</button>
             <div class="inline-hint">※このフォームは安全に送信され、メールアドレスはサイト上に公開されません。</div>
@@ -322,7 +405,6 @@
           <div class="help" style="margin-top:8px">送信後、受付完了メッセージが表示されます。折り返しご連絡いたします。</div>
         </form>
 
-        <!-- サイド案内 -->
         <div class="panel" aria-label="進め方">
           <h3>対応エリア / 進め方</h3>
           <ol style="margin:10px 0 0 18px">
@@ -347,13 +429,11 @@
   <!-- Toast -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <noscript>
-    <div style="background:#300;color:#fff;padding:10px;text-align:center">このサイトはJavaScriptを使用しています。無効の場合、送信が行えません。</div>
-  </noscript>
+  <noscript><div style="background:#300;color:#fff;padding:10px;text-align:center">このサイトはJavaScriptを使用しています。無効の場合、送信が行えません。</div></noscript>
 
   <script>
-    // ====== 設定：GASのウェブアプリURLに差し替え ======
-    const ENDPOINT = 'https://script.google.com/macros/s/【ここにGASのURL】/exec'; // ← 要変更
+    // ====== GAS エンドポイント（あなたのURLに差し替え） ======
+    const ENDPOINT = 'https://script.google.com/macros/s/【ここにGASのURL】/exec';
 
     const form = document.getElementById('mailForm');
     const toast = document.getElementById('toast');
@@ -375,13 +455,10 @@
         topic: v('topic'),
         message: v('message')
       };
-
-      // 必須チェック
       if(!payload.company || !payload.name || !payload.email){
         showToast('会社名・ご担当者名・メールアドレスは必須です。', false);
         return;
       }
-
       try{
         const res = await fetch(ENDPOINT, {
           method: 'POST',
@@ -390,8 +467,7 @@
         });
         const json = await res.json().catch(()=>({ok:false}));
         if(!res.ok || !json.ok) throw new Error(json.error || '送信に失敗しました');
-        form.reset();
-        showToast('送信しました。折り返しご連絡いたします。', true);
+        form.reset(); showToast('送信しました。折り返しご連絡いたします。', true);
       }catch(err){
         console.error(err);
         showToast('送信に失敗しました。時間をおいて再度お試しください。', false);
