@@ -1,216 +1,402 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>工場ミニDXサイト</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工場ミニDX｜最小5万円で始める小さなデジタル化</title>
+  <meta name="description" content="中小製造業向け・外注は高額が当たり前？必要なところだけを小さく。最小5万円から短期間導入、維持費不要。デジタル初心者でもメンテ可能な設計で伴走します。">
   <style>
-    :root {
-      --bg: #0e1525;
-      --fg: #ffffff;
-      --accent: #4fc3f7;
-      --line: rgba(255,255,255,0.2);
-    }
-    * { box-sizing: border-box; margin:0; padding:0; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      line-height: 1.6;
-    }
-    header {
-      text-align:center;
-      padding: 4rem 2rem 2rem;
-      background: linear-gradient(135deg, #1e2a3a, #0e1525 70%);
-    }
-    header h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-    header p { font-size: 1.2rem; color: #ccc; }
+    /* ===== CSS Reset (軽量) ===== */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    img{max-width:100%;display:block}
+    button,input,select,textarea{font:inherit}
 
-    section {
-      max-width: 1000px;
-      margin: 3rem auto;
-      padding: 2rem;
-    }
-    h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      border-bottom: 2px solid var(--accent);
-      display:inline-block;
+    /* ===== Theme Tokens ===== */
+    :root{
+      --bg:#0b1220;
+      --bg-2:#0f1730;
+      --fg:#e8eef9;
+      --fg-muted:#a8b0c3;
+      --brand:#69b3ff;
+      --accent:#ffd166;
+      --ok:#15d1b1;
+      --line:#223055;
+      --glass: rgba(17,25,45,.55);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --r-sm:12px; --r-md:16px; --r-lg:22px;
+      --max:1200px;
     }
 
-    .deco{
-      position:relative;
-      width:100%;
-      height:auto;
-      min-height:320px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      justify-content:center;
-      align-items:center;
-      padding:10px;
-    }
-    .chip{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      padding:10px 14px;
-      border-radius:12px;
-      background:rgba(13,22,46,.75);
-      backdrop-filter:blur(8px);
-      border:1px solid var(--line);
-      font-size:14px;
-      animation:floaty 6s ease-in-out infinite;
-      max-width:220px;
-      flex:0 1 220px;
-      white-space:normal;
-      word-break:break-word;
-      overflow-wrap:anywhere;
-    }
-    @keyframes floaty {
-      0%,100%{ transform:translateY(0); }
-      50%{ transform:translateY(-4px); }
-    }
-
-    .price {
-      text-align:center;
-      margin:2rem 0;
-    }
-    .price-badge {
-      display:inline-block;
-      padding: 1rem 2rem;
-      font-size:1.6rem;
-      background: var(--accent);
-      color:#000;
-      border-radius: 12px;
-      font-weight:bold;
-    }
-
-    form {
-      background: rgba(255,255,255,0.05);
-      padding:2rem;
-      border-radius:12px;
-      box-shadow:0 4px 16px rgba(0,0,0,0.4);
-    }
-    form label {
-      display:block;
-      margin-top:1rem;
-      margin-bottom:0.3rem;
-      font-weight:bold;
-    }
-    form input, form textarea {
-      width:100%;
-      padding:0.8rem;
-      border-radius:8px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.1);
+    /* ===== Base ===== */
+    body{
+      font-family: "Noto Sans JP", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       color:var(--fg);
+      background:
+        radial-gradient(80rem 30rem at 10% -10%, rgba(60,120,255,.25), transparent 50%),
+        radial-gradient(60rem 25rem at 90% -20%, rgba(20,200,255,.18), transparent 55%),
+        linear-gradient(180deg, #081123, #0b1324 35%, #0d1529 100%);
+      letter-spacing:.02em;
     }
-    form button {
-      margin-top:1.5rem;
-      padding:1rem 2rem;
-      border:none;
-      border-radius:8px;
-      background:var(--accent);
-      color:#000;
-      font-size:1rem;
-      font-weight:bold;
-      cursor:pointer;
-      transition: background 0.3s;
-    }
-    form button:hover { background:#81d4fa; }
+    .container{max-width:var(--max);margin:0 auto;padding:0 24px}
 
-    footer {
-      text-align:center;
-      padding:2rem;
-      font-size:0.9rem;
-      color:#aaa;
+    /* ===== Nav ===== */
+    .nav{
+      position:sticky; top:0; z-index:30;
+      backdrop-filter: saturate(140%) blur(10px);
+      background: linear-gradient(180deg, rgba(10,16,30,.85), rgba(10,16,30,.3));
+      border-bottom:1px solid var(--line);
     }
+    .nav-inner{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
+    .logo{display:flex;align-items:center;gap:12px;font-weight:800}
+    .logo-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#63b6ff,#7fd4ff);box-shadow:0 6px 18px rgba(120,190,255,.45)}
+    .logo-text{letter-spacing:.04em}
+    .nav a.btn{padding:10px 14px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--fg)}
+    .nav a.btn:hover{border-color:#2c3b66}
+
+    /* ===== Hero ===== */
+    .hero{padding:80px 0 54px}
+    .hero-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+    @media (max-width:980px){.hero-wrap{grid-template-columns:1fr}}
+    .hero-copy{
+      border:1px solid var(--line); border-radius:var(--r-lg);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow:var(--shadow); padding:22px;
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
+      background:rgba(105,179,255,.16); color:#d9ebff;
+      font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    }
+    .badge{display:inline-flex;align-items:center;gap:6px;margin-left:8px;
+      padding:6px 12px;border-radius:999px;border:1px solid rgba(255,209,102,.35);
+      background:rgba(255,209,102,.18); color:var(--accent); font-weight:900}
+    h1{font-size:clamp(26px,4.6vw,46px);line-height:1.25;margin:12px 0 8px}
+    .lead{color:var(--fg-muted);font-size:clamp(15px,2.2vw,18px)}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      border:0;border-radius:14px;padding:12px 18px;font-weight:900;cursor:pointer;
+      text-decoration:none;transition:transform .06s ease, opacity .2s ease, box-shadow .2s ease;
+    }
+    .btn-primary{background:linear-gradient(135deg,#73bbff,#4ea0ff);color:#041224; box-shadow:0 10px 20px rgba(79,157,255,.28)}
+    .btn-primary:hover{transform:translateY(-1px)}
+    .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--fg)}
+    .btn-ghost:hover{border-color:#2f457e}
+
+    /* ===== Hero Visual (Chips as grid) ===== */
+    .deco{
+      border:1px solid var(--line); border-radius:var(--r-lg);
+      background:
+        radial-gradient(50% 40% at 50% 0%, rgba(100,170,255,.18), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      padding:18px; display:grid; gap:12px;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+    }
+    @media (max-width:980px){.deco{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:520px){.deco{grid-template-columns:1fr}}
+    .chip{
+      display:flex;gap:10px;align-items:center;justify-content:flex-start;
+      padding:12px 14px;border-radius:12px;border:1px solid var(--line);
+      background:var(--glass);backdrop-filter: blur(8px);
+      font-size:14px; min-height:44px;
+      animation:floaty 6.5s ease-in-out infinite;
+      white-space:normal; word-break:break-word; overflow-wrap:anywhere;
+    }
+    .chip:nth-child(3n){animation-delay:.25s}
+    .chip:nth-child(2n){animation-delay:.5s}
+    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+    /* ===== Sections ===== */
+    section{padding:60px 0}
+    h2{font-size:clamp(22px,3.2vw,30px);margin:0 0 12px}
+    .muted{color:var(--fg-muted)}
+
+    .grid-3{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+    @media (max-width:980px){.grid-3{grid-template-columns:1fr}}
+    .card{background:var(--glass);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 6px;font-size:18px}
+
+    .panel{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+      border:1px solid var(--line);border-radius:var(--r-md);padding:18px;box-shadow:var(--shadow)}
+
+    /* ===== Pricing ===== */
+    .pricing{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:stretch}
+    @media (max-width:980px){.pricing{grid-template-columns:1fr}}
+    .price-card{background:var(--glass);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow)}
+    .price-title{font-weight:800;color:#d9eaff}
+    .price-main{font-size:46px;font-weight:900;letter-spacing:.4px;margin:6px 0}
+    .price-main .yen{font-size:.6em;margin-right:4px;color:var(--fg-muted)}
+    .price-main .min{font-size:.5em;margin-left:2px;color:var(--fg-muted)}
+    .price-list{margin:10px 0 0 18px}
+    .price-list li{margin:6px 0}
+    .price-foot{margin-top:10px;color:var(--fg-muted)}
+
+    /* ===== Contact Form ===== */
+    .contact-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
+    @media (max-width:980px){.contact-wrap{grid-template-columns:1fr}}
+    form.mailform{background:var(--glass);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:780px){.form-grid{grid-template-columns:1fr}}
+    .field{display:flex;flex-direction:column;gap:8px}
+    .label{font-size:.92rem;color:#d3dbef;font-weight:800;letter-spacing:.06em}
+    .req{color:var(--accent);margin-left:6px}
+    .inp,.sel,.txt{
+      width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));
+      color:var(--fg);font-size:16px;outline:none;transition:border .2s ease, box-shadow .2s ease;
+    }
+    .inp:focus,.sel:focus,.txt:focus{border-color:#32539b;box-shadow:0 0 0 4px rgba(105,179,255,.18)}
+    .help{color:var(--fg-muted);font-size:.85rem}
+    .form-actions{display:flex;gap:12px;align-items:center;margin-top:10px;flex-wrap:wrap}
+    .btn-send{background:linear-gradient(135deg,#7fd4ff,#63b6ff);color:#071321}
+    .inline-hint{display:flex;gap:10px;align-items:center;color:var(--fg-muted);font-size:.9rem}
+
+    /* ===== Toast (送信結果) ===== */
+    .toast{
+      position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);
+      background:#07101e; color:var(--fg); border:1px solid var(--line);
+      padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);
+      opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease;
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .toast.ok{border-color:rgba(21,209,177,.4)}
+    .toast.ng{border-color:rgba(255,90,90,.4)}
+
+    /* ===== Footer ===== */
+    footer{border-top:1px solid var(--line);margin-top:36px;background:rgba(5,10,20,.6)}
+    .foot{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    @media (max-width:740px){.foot{flex-direction:column;gap:10px}}
+    .foot small{color:var(--fg-muted)}
   </style>
 </head>
 <body>
+  <!-- ===== Nav ===== -->
+  <nav class="nav" aria-label="トップナビ">
+    <div class="container nav-inner">
+      <div class="logo" aria-label="ロゴ">
+        <div class="logo-mark" aria-hidden="true"></div>
+        <div class="logo-text">工場ミニDX</div>
+      </div>
+      <a class="btn" href="#contact">お問い合わせ</a>
+    </div>
+  </nav>
 
-<header>
-  <h1>工場ミニDXサービス</h1>
-  <p>中小工場向けの低コスト・短期間のデジタル化支援</p>
-</header>
+  <!-- ===== Hero ===== -->
+  <header class="hero">
+    <div class="container hero-wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">中小向け 小さく始めるDX <span class="badge">最小5万円</span></span>
+        <h1>「DX外注は高額」が当たり前？<br>必要なところだけを<span style="color:var(--brand)">小さく、素早く。</span></h1>
+        <p class="lead">大規模スクラッチではなく、<strong>紙1枚の置き換え</strong>や<strong>1工程の見える化</strong>から。<br>短期間・低コストで効果確認。<strong>維持費はかかりません</strong>。<strong>デジタル初心者でもメンテ可能</strong>な設計で伴走します。</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#contact">無料相談・見積り</a>
+          <a class="btn btn-ghost" href="#why">なぜ高額になるのか</a>
+        </div>
+      </div>
 
-<section>
-  <h2>なぜ必要？</h2>
-  <p>
-    DXを外注すると「高額・長期間」が当たり前と思われています。  
-    しかし私たちの「工場ミニDX」なら、必要な機能だけを小さく導入。  
-    短期間・低コストで導入可能です。維持費も不要、デジタル初心者でも扱いやすい設計が可能です。
-  </p>
-</section>
+      <!-- 視覚要素（グリッド状チップ） -->
+      <div class="deco" aria-hidden="true">
+        <div class="chip">💾 簡易ダッシュボード</div>
+        <div class="chip">📱 現場入力（スマホ/タブレット）</div>
+        <div class="chip">📊 日報自動作成</div>
+        <div class="chip">⚙️ 在庫管理</div>
+        <div class="chip">⏱️ 作業時間の可視化</div>
+        <div class="chip">🧾 見積・請求の自動化</div>
+        <div class="chip">📦 出荷管理</div>
+        <div class="chip">📈 売上レポート</div>
+        <div class="chip">🛠️ 設備点検記録</div>
+        <div class="chip">👥 人員シフト管理</div>
+        <div class="chip">🔗 IoTセンサー連携</div>
+        <div class="chip">🧪 小規模PoC対応</div>
+      </div>
+    </div>
+  </header>
 
-<section>
-  <h2>できること</h2>
-  <div class="deco" aria-hidden>
-    <div class="chip">💾 簡易ダッシュボード</div>
-    <div class="chip">📱 現場入力（スマホ/タブレット）</div>
-    <div class="chip">📊 日報自動作成</div>
-    <div class="chip">⚙️ 在庫管理</div>
-    <div class="chip">⏱️ 作業時間の可視化</div>
-    <div class="chip">🧾 見積・請求の自動化</div>
-    <div class="chip">📦 出荷管理</div>
-    <div class="chip">📈 売上レポート</div>
-    <div class="chip">🛠️ 設備点検記録</div>
-    <div class="chip">👥 人員シフト管理</div>
-  </div>
-</section>
+  <!-- ===== Why High ===== -->
+  <section id="why">
+    <div class="container">
+      <h2>「外注＝高額」の理由と、工場ミニDXの方針</h2>
+      <p class="muted">大掛かりに作るから高い。だから、<strong>大きく作らない</strong>という選択肢を。</p>
+      <div class="grid-3">
+        <div class="card"><h3>① フルスクラッチ前提</h3><p>全部入り要件で工数膨張。まずは既存ツール×最小構成で試験導入。</p></div>
+        <div class="card"><h3>② 全面導入から着手</h3><p>最初は1工程/1帳票に限定。効果が見えたら範囲を広げます。</p></div>
+        <div class="card"><h3>③ 外部依存の固定費</h3><p>運用は現場で回せる設計に。保守もシンプル、<strong>維持費はかかりません</strong>。</p></div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <p><strong>結論：</strong>最初から“全部”はやらない。<strong>最小5万円</strong>で小さく始め、ムダ打ちを防ぎます。</p>
+      </div>
+    </div>
+  </section>
 
-<section class="price">
-  <h2>料金</h2>
-  <div class="price-badge">最小 5万円〜</div>
-  <p>「最低限ここから」始められる安心プラン</p>
-</section>
+  <!-- ===== Features ===== -->
+  <section id="features">
+    <div class="container">
+      <h2>できること（必要最小限から）</h2>
+      <div class="grid-3">
+        <div class="card"><h3>紙帳票のデジタル化</h3><p>スマホ/タブレットで入力。転記・二重入力を削減。</p></div>
+        <div class="card"><h3>進捗の見える化</h3><p>工程ごとのステータスを簡易ダッシュボードで共有。</p></div>
+        <div class="card"><h3>日報の自動作成</h3><p>入力データから日報・月報をワンクリック出力。</p></div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <strong>運用ポリシー</strong>
+        <ul style="margin:8px 0 0 18px">
+          <li><strong>デジタル初心者でもメンテ可能</strong>な設計（ノーコード/ローコード中心）</li>
+          <li><strong>維持費はかかりません</strong>（外部有料SaaSを使わない構成を推奨）</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-<section>
-  <h2>お問い合わせ</h2>
-  <p>以下のフォームからお問い合わせください。（メールアドレスは公開されません）</p>
-  <form id="contact-form">
-    <label for="name">お名前*</label>
-    <input type="text" id="name" name="name" required>
+  <!-- ===== Pricing ===== -->
+  <section id="pricing">
+    <div class="container pricing">
+      <div class="price-card">
+        <div class="price-title">スモール導入プラン</div>
+        <div class="price-main"><span class="yen">¥</span>50,000<span class="min">〜</span></div>
+        <ul class="price-list">
+          <li>対象：1帳票 or 1工程のデジタル化</li>
+          <li>簡易ダッシュボード（1画面）</li>
+          <li>初期設定・操作レクチャー</li>
+        </ul>
+        <div class="price-foot">まずは<strong>最小5万円</strong>で効果確認 → 有効なら拡張。</div>
+      </div>
+      <div class="panel">
+        <h3>よくある不安に先回り</h3>
+        <ul style="margin:10px 0 0 18px">
+          <li>短期間でできる？ → 範囲を絞るから短工期で開始可能</li>
+          <li>ITが苦手… → 操作はスマホ感覚。初期レクチャー付き</li>
+          <li>結局高くならない？ → 必要時のみ拡張し、固定費を抑制</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <label for="company">会社名</label>
-    <input type="text" id="company" name="company">
+  <!-- ===== Contact ===== -->
+  <section id="contact">
+    <div class="container">
+      <h2>お問い合わせ</h2>
+      <div class="contact-wrap">
+        <!-- 送信フォーム（メール非公開・サーバーレスPOST） -->
+        <form class="mailform" id="mailForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label class="label" for="company">会社名<span class="req">*</span></label>
+              <input class="inp" type="text" id="company" placeholder="例）〇〇製作所" required>
+              <div class="help">法人でない場合は屋号または「個人」とご記入ください。</div>
+            </div>
+            <div class="field">
+              <label class="label" for="name">ご担当者名<span class="req">*</span></label>
+              <input class="inp" type="text" id="name" placeholder="例）山田 太郎" required>
+            </div>
+            <div class="field">
+              <label class="label" for="tel">電話番号</label>
+              <input class="inp" type="tel" id="tel" inputmode="tel" pattern="[0-9\\-+ ]{10,}" placeholder="例）090-1234-5678">
+              <div class="help">ハイフンあり/なし どちらでもOK</div>
+            </div>
+            <div class="field">
+              <label class="label" for="email">メールアドレス<span class="req">*</span></label>
+              <input class="inp" type="email" id="email" placeholder="例）taro@example.com" required>
+            </div>
+            <div class="field">
+              <label class="label" for="topic">ご相談内容</label>
+              <select class="sel" id="topic">
+                <option value="紙帳票のデジタル化">紙帳票のデジタル化</option>
+                <option value="工程進捗の見える化">工程進捗の見える化</option>
+                <option value="日報の自動化">日報の自動化</option>
+                <option value="その他">その他</option>
+              </select>
+            </div>
+            <div class="field" style="grid-column:1/-1">
+              <label class="label" for="message">現場の課題・ご要望（任意）</label>
+              <textarea class="txt" id="message" rows="6" placeholder="現状の流れ／困っている点／改善したい数値など"></textarea>
+            </div>
+          </div>
 
-    <label for="email">メールアドレス*</label>
-    <input type="email" id="email" name="email" required>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-send">送信する</button>
+            <div class="inline-hint">※このフォームは安全に送信され、メールアドレスはサイト上に公開されません。</div>
+          </div>
+          <div class="help" style="margin-top:8px">送信後、受付完了メッセージが表示されます。折り返しご連絡いたします。</div>
+        </form>
 
-    <label for="message">お問い合わせ内容*</label>
-    <textarea id="message" name="message" rows="5" required></textarea>
+        <!-- サイド案内 -->
+        <div class="panel" aria-label="進め方">
+          <h3>対応エリア / 進め方</h3>
+          <ol style="margin:10px 0 0 18px">
+            <li>オンラインで現場の課題をヒアリング（30〜45分）</li>
+            <li>スモール導入の提案（範囲・費用・期間）</li>
+            <li>最小5万円で試験導入 → 効果確認後に拡張</li>
+          </ol>
+          <p class="muted" style="margin-top:10px">※対面が必要な場合は別途交通費等をご相談させてください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <button type="submit">送信する</button>
-  </form>
-  <p id="result"></p>
-</section>
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="container foot">
+      <small>&copy; 2025 工場ミニDX</small>
+      <small class="muted">お問い合わせは上部フォームよりお送りください（メールアドレスは非公開）</small>
+    </div>
+  </footer>
 
-<footer>
-  <p>© 2025 工場ミニDX</p>
-</footer>
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-<script>
-  const ENDPOINT = "https://script.google.com/macros/s/【ここにGASのURL】/exec";
+  <noscript>
+    <div style="background:#300;color:#fff;padding:10px;text-align:center">このサイトはJavaScriptを使用しています。無効の場合、送信が行えません。</div>
+  </noscript>
 
-  document.getElementById("contact-form").addEventListener("submit", async function(e){
-    e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-    try {
-      const res = await fetch(ENDPOINT, { method: "POST", body: data });
-      if (res.ok) {
-        document.getElementById("result").textContent = "送信が完了しました。ありがとうございます！";
-        form.reset();
-      } else {
-        document.getElementById("result").textContent = "送信に失敗しました。時間をおいて再度お試しください。";
-      }
-    } catch (err) {
-      document.getElementById("result").textContent = "エラーが発生しました。";
+  <script>
+    // ====== 設定：GASのウェブアプリURLに差し替え ======
+    const ENDPOINT = 'https://script.google.com/macros/s/【ここにGASのURL】/exec'; // ← 要変更
+
+    const form = document.getElementById('mailForm');
+    const toast = document.getElementById('toast');
+
+    function showToast(msg, ok=true){
+      toast.textContent = msg;
+      toast.className = 'toast ' + (ok ? 'ok' : 'ng') + ' show';
+      setTimeout(()=> toast.classList.remove('show'), 2800);
     }
-  });
-</script>
 
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const v = id => document.getElementById(id).value.trim();
+      const payload = {
+        company: v('company'),
+        name: v('name'),
+        tel: v('tel'),
+        email: v('email'),
+        topic: v('topic'),
+        message: v('message')
+      };
+
+      // 必須チェック
+      if(!payload.company || !payload.name || !payload.email){
+        showToast('会社名・ご担当者名・メールアドレスは必須です。', false);
+        return;
+      }
+
+      try{
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const json = await res.json().catch(()=>({ok:false}));
+        if(!res.ok || !json.ok) throw new Error(json.error || '送信に失敗しました');
+        form.reset();
+        showToast('送信しました。折り返しご連絡いたします。', true);
+      }catch(err){
+        console.error(err);
+        showToast('送信に失敗しました。時間をおいて再度お試しください。', false);
+      }
+    });
+  </script>
 </body>
 </html>
