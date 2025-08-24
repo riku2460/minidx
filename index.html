@@ -146,6 +146,28 @@
       .sel option{ color:#111; background:#fff; }
     }
   </style>
+
+  <!-- === Google Analytics 4 (最小構成) === -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9WJ3MZJLED"></script>
+<script>
+  // 基本初期化
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  // （任意）同意モードの初期値。必要なら後で書き換え可
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'granted',
+    wait_for_update: 500
+  });
+
+  // ページビュー送信
+  gtag('config', 'G-9WJ3MZJLED'); 
+</script>
+
 </head>
 <body>
   <!-- ===== Nav ===== -->
